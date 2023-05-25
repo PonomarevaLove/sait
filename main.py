@@ -12,3 +12,4 @@ for i in title:
             new_text.append(value)
 string1 =''.join(new_text)
 st.text(string1)
+#
