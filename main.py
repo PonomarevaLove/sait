@@ -1,7 +1,26 @@
+import base64
+
 import streamlit as st
 
+
+def add_bg_from_local(image_file):
+    with open(image_file, "rb") as image_file:
+        encoded_string = base64.b64encode(image_file.read())
+    st.markdown(
+    f"""
+    <style>
+    .stApp {{
+        background-image: url(data:image/{"jpg"};base64,{encoded_string.decode()});
+        background-size: cover
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+    )
+add_bg_from_local('lll.jpg')
+
 title = st.text_input('Введите текст для перевода')
-st.write('Данный текст будет переведён из нечитаемого формата в приемлемый, согласно раскладке клавиатуры QWE')
+st.write('Введённый текст будет переведён из нечитаемого формата в приемлемый, согласно раскладке клавиатуры QWE')
 
 dict_alpha = {'q': 'й', 'w': 'ц', 'e': 'у', 'r': 'к', 't': 'е', 'y': 'н',
               'u': 'г', 'i': 'ш', 'o': 'щ', 'p': 'з', '[': 'х', ']': 'ъ',
@@ -30,9 +49,13 @@ dict_alpha = {'q': 'й', 'w': 'ц', 'e': 'у', 'r': 'к', 't': 'е', 'y': 'н',
               'Й': 'Q',  'Ц': 'W', 'У': 'E', 'К': 'R', 'Е': 'T', 'Н': 'Y', 
               'Г': 'U', 'Ш': 'I', 'Щ': 'O', 'З': 'P', 'Х': '{', 'Ъ': '}', 
               'Ф': 'A', 'Ы': 'S', 'В': 'D', 'А': 'F', 'П': 'G', 'Р': 'H', 
-              'О': 'J', 'Л': 'K', 'Д': 'L', 'Ж': ':', 'Э': '"', '/': '|', 
+              'О': 'J', 'Л': 'K', 'Д': 'L', 'Ж': ':', 'Э': '"', '/': '|',
               'Я': 'Z',  'Ч': 'X',  'С': 'C',  'М': 'V', 'И': 'B', 'Т': 'N', 
               'Ь': 'M', 'Б': '<', 'Ю': '>', ',': '?',
+
+              '!': '!', '@': '@', '#': '#', '№': '№', '$': '$', ';': ';',
+              '%': '%', '^': '^', '*': '*', '(': '(', ')': ')', '-': '-',
+              '_': '_', '+': '+', '=': '=', '    ': '    ', '`': 'ё', '~': 'Ё',
               }
 
 new_text = []
@@ -42,4 +65,4 @@ for i in title:
             new_text.append(value)
 string1 =''.join(new_text)
 st.text(string1)
-#
+
