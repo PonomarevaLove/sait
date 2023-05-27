@@ -18,8 +18,9 @@ def add_bg_from_local(image_file):
     unsafe_allow_html=True
     )
 add_bg_from_local('lll.jpg')
-
-title = st.text_input('Введите текст для перевода')
+txt = st.text_area('Введите текст для перевода', '''
+    ''')
+# title = st.text_input('Введите текст для перевода', disabled=False, max_chars=500)
 st.write('Введённый текст будет переведён из нечитаемого формата в приемлемый, согласно раскладке клавиатуры QWE')
 
 dict_alpha = {'q': 'й', 'w': 'ц', 'e': 'у', 'r': 'к', 't': 'е', 'y': 'н',
@@ -56,13 +57,15 @@ dict_alpha = {'q': 'й', 'w': 'ц', 'e': 'у', 'r': 'к', 't': 'е', 'y': 'н',
               '!': '!', '@': '@', '#': '#', '№': '№', '$': '$',
               '%': '%', '^': '^', '*': '*', '(': '(', ')': ')', '-': '-',
               '_': '_', '+': '+', '=': '=', '    ': '    ', '`': 'ё', '~': 'Ё',
+              '\n':'\n'
               }
 
 new_text = []
-for i in title:
+for i in txt:
     for key, value in dict_alpha.items():
         if i == key:
             new_text.append(value)
 string1 =''.join(new_text)
 st.text(string1)
+
 
