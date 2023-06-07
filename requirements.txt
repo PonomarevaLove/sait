@@ -40,3 +40,5 @@ opt-einsum==3.3.0
 packaging==23.0
 pandas==1.5.3
 pefile==2023.2.7
+
+gTTS~=2.3.2
